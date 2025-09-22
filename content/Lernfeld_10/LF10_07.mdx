@@ -1,0 +1,73 @@
+---
+title: 'RADIUS - Remote Authentication Dial-In User Service'
+description: 'AAA-Framework für Netzwerkzugang mit Authentication, Authorization und Accounting'
+tags: ['Netzwerk', 'RADIUS', 'AAA', 'Authentifizierung', 'EAP', 'WLAN-Sicherheit']
+---
+
+# RADIUS
+
+> **Remote Authentication Dial-In User Service:** AAA-Framework für Netzwerkzugang
+
+## AAA-Prinzipien
+
+**Drei Säulen:**
+```
+Authentication → Wer bist du?
+Authorization → Was darfst du?
+Accounting → Was hast du getan?
+```
+
+## Einsatzgebiete
+
+- **LAN/WLAN:** Netzwerkzugang
+- **VLAN:** Dynamische Zuordnung
+- **VPN:** Remote-Access
+- **Network Devices:** Switch/Router Login
+
+## Architektur
+
+**3-Komponenten-Modell:**
+```
+┌───────────┐     ┌───────────────┐     ┌────────────────┐ 
+│ Supplicant│◄───►│ Authenticator │◄───►│ Authentication │
+│ Client    │     │ Access Point/ │     │ Server         │
+│           │     │ Switch        │     │ RADIUS Server  │ 
+└───────────┘     └───────────────┘     └────────────────┘ 
+```
+
+## Authentifizierungs-Ablauf
+
+**7-Schritt Prozess:**
+
+1. **Supplicant → Authenticator:** Verbindungsanfrage
+2. **Authenticator → Supplicant:** Authentication Request
+3. **Supplicant → Authenticator:** Credentials (User/Pass)
+4. **Authenticator → RADIUS Server:** Access-Request
+5. **RADIUS Server:** Credential Verification
+6. **RADIUS Server → Authenticator:** Access-Accept/Reject/Challenge
+7. **Authenticator → Supplicant:** Zugang gewähren/verweigern
+
+## RADIUS-Antworten
+
+| Response | Bedeutung |
+|----------|-----------|
+| **Access-Accept** | Authentifizierung erfolgreich |
+| **Access-Reject** | Authentifizierung fehlgeschlagen |
+| **Access-Challenge** | Zusätzliche Informationen benötigt |
+
+## Vor-/Nachteile
+
+| Vorteile | Nachteile |
+|----------|-----------|
+| Zentrale Benutzerverwaltung | Komplexere Infrastruktur |
+| Hohe Skalierbarkeit | Single Point of Failure |
+| Flexibilität bei Auth-Methoden | Netzwerk-Abhängigkeit |
+| Umfassendes Logging | Zusätzlicher Admin-Aufwand |
+
+## EAP (Extensible Authentication Protocol)
+
+**Framework für verschiedene Auth-Methoden:**
+- **Passwort-basiert:** PEAP, EAP-TTLS
+- **Zertifikat-basiert:** EAP-TLS
+- **Token-basiert:** EAP-SIM
+- **Biometrisch:** Fingerprint, Iris
